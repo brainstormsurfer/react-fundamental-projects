@@ -1,21 +1,4 @@
-import Navbar from "./components/Navbar";
-import About from "./components/About";
-import Hero from "./components/Hero";
-import Tours from "./components/Tours";
-import Services from "./components/Services";
-import Footer from "./components/Footer";
-
-function App() {
-  return (
-    <>
-      <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Tours />
-      <Footer />
-    </>
-  );
-}
-
+const App = () => {
+  return <h2>Birthday Reminder - Starter</h2>;
+};
 export default App;
