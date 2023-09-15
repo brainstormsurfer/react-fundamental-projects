@@ -17,7 +17,7 @@ const clearPeople = () => {
     <main>
       <section className="container">
         <h3>{people.length} birthdays today</h3>
-        <List people={people}/>
+        <List people={people}  removePerson={removePerson}/>
       <button className="btn btn-block" onClick={() => clearPeople()}>Clear All</button>
       </section>
     </main>
