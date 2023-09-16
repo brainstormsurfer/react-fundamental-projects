@@ -1,12 +1,12 @@
 import { useState } from "react"
 
-const Tour = ({image, info, name, price, removeTour}) => {
+const Tour = ({id, image, info, name, price, removeTour}) => {
     const [readMore, setReadMore] = useState(false)    
 
   return (
     <div>        
     <li className="single-tour">
-        <img className="img" src={image} alt={name} />    
+        <img className="img tour-info" src={image} alt={name} />    
         <h5 className="title">{name}</h5>
         <p className="tour-price">{price}</p>
         { readMore ?
@@ -17,7 +17,7 @@ const Tour = ({image, info, name, price, removeTour}) => {
         {readMore ? "Minimize"  : "Read More..." }
         </button>
     </li>
-        <button className="btn btn-block delete-btn" onClick={removeTour}>Remove</button>
+        <button className="btn btn-block delete-btn" onClick={() => removeTour(id)}>Remove</button>
     </div>
   )
 }

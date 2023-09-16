@@ -28,11 +28,15 @@ const App = () => {
     };
     fetchData();
   }, []);
-  
 
     const removeTour = (id) => {
-        const filteredTours = tours.filter((tourToRemove) => tourToRemove.id !== id)
+        const filteredTours = tours.filter((tourToRemove) => {
+            return tourToRemove.id !== id
+            // console.log("tourToRemove", tourToRemove.id)
+            })
+
         if (filteredTours) {
+          console.log(filteredTours)
           setTours(filteredTours)
         }
     }
