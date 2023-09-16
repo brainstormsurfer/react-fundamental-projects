@@ -2,13 +2,15 @@ import Tours from "./components/Tours";
 import Loading from "./components/Loading";
 import { useEffect, useState } from "react";
 
+
 const url = "https://course-api.com/react-tours-project";
 
 const App = () => {
   const [tours, setTours] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [refetch, setRefetch] = useState(true)
 
-  useEffect(() => {
+  useEffect(() => {    
     const fetchData = async () => {
       try {
         const response = await fetch(url);
@@ -21,18 +23,18 @@ const App = () => {
           console.log(tours);
           setTours(tours);        
           setIsLoading(false)
+          setRefetch(false)
         }
       } catch (error) {
         console.log(error);
       }
     };
-    fetchData();
-  }, []);
+    refetch && fetchData();
+  }, [refetch]);
 
     const removeTour = (id) => {
         const filteredTours = tours.filter((tourToRemove) => {
             return tourToRemove.id !== id
-            // console.log("tourToRemove", tourToRemove.id)
             })
 
         if (filteredTours) {
@@ -40,17 +42,19 @@ const App = () => {
           setTours(filteredTours)
         }
     }
-
-
-
+  
   return (
-    <main>
-      <h2 className="title">Our Tours</h2>
-      <h2 className="title-underline"></h2>
-      { isLoading ? (
-        <Loading />
-      ) : (
-        <Tours tours={tours} removeTour={removeTour}/>)
+    <main>   
+      { isLoading ? <Loading /> : (
+        <>
+        <h2 className="title">Our Tours</h2>
+        <h2 className="title-underline"></h2>
+        <Tours tours={tours} removeTour={removeTour}/>
+        <button className="btn" onClick={() => setRefetch(true)}>
+          Refresh <i class="fa-solid fa-arrows-rotate"></i> Tours
+          </button>
+        </>
+        )
       }
     </main>
   );

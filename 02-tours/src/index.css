@@ -319,6 +319,7 @@ main {
 .info-btn {
   color: var(--primary-500);
   font-weight: 600;
+  margin: 10px;
 }
 
 .delete-btn {
