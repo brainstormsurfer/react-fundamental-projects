@@ -2,11 +2,7 @@ import Tour from "./Tour"
 
 const Tours = ({tours}) => {
 
-    const onRemove = () => {
-        
-    }
-
-  return (
+    return (
     <ul className="tours">
         {        
             tours.map((tour) => <Tour key={tour.id} {...tour} />) 

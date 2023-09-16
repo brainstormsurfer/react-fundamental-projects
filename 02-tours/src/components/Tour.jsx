@@ -1,19 +1,23 @@
 import { useState } from "react"
 
-const Tour = ({image, info, name, price}) => {
-    const [ReadMore, RetreadMore] = useState(false)
+const Tour = ({image, info, name, price, removeTour}) => {
+    const [readMore, setReadMore] = useState(false)    
+
   return (
     <div>        
-    <li className="single-tour title">
-        <h5 className="tour-info">{name}</h5>
-        <img className="single-tour img" src={image} alt={name} />    
-        <p className="single-tour tour-price">{price}</p>
-        <p className="tour-info">{info}</p>
-        {/* <div className="btn btn-block"> */}
-        <button className="btn info-btn">Read More</button>
+    <li className="single-tour">
+        <img className="img" src={image} alt={name} />    
+        <h5 className="title">{name}</h5>
+        <p className="tour-price">{price}</p>
+        { readMore ?
+            <p style={{height: "fit-content", overflow: "none"}}className="tour-info">{info}</p> :
+            <p className="tour-info">{info}</p>
+        }
+        <button className="btn info-btn" onClick={() => setReadMore(!readMore)}>
+        {readMore ? "Minimize"  : "Read More..." }
+        </button>
     </li>
-        {/* </div> */}
-        <button className="btn delete-btn">Remove</button>
+        <button className="btn btn-block delete-btn" onClick={removeTour}>Remove</button>
     </div>
   )
 }

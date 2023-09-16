@@ -294,6 +294,8 @@ main {
 
 .tour-info {
   padding: 2rem 1.5rem;
+  height: 50px;
+  overflow: hidden;
 }
 
 .tour-info h5 {

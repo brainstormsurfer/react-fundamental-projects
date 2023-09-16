@@ -28,15 +28,25 @@ const App = () => {
     };
     fetchData();
   }, []);
+  
+
+    const removeTour = (id) => {
+        const filteredTours = tours.filter((tourToRemove) => tourToRemove.id !== id)
+        if (filteredTours) {
+          setTours(filteredTours)
+        }
+    }
 
 
 
   return (
     <main>
+      <h2 className="title">Our Tours</h2>
+      <h2 className="title-underline"></h2>
       { isLoading ? (
         <Loading />
       ) : (
-        <Tours tours={tours} />)
+        <Tours tours={tours} removeTour={removeTour}/>)
       }
     </main>
   );
