@@ -297,12 +297,13 @@ main {
   left: 0;
   width: 2.5rem;
   height: 2.5rem;
-  display: grid;
-  place-items: center;
+  display: grid;  
+  place-items: center;  
   border-radius: 50%;
   transform: translateY(25%);
   background-color: var(--primary-500);
   color: var(--white);
+  padding: .6em;
 }
 
 .img-container::before {
@@ -316,6 +317,7 @@ main {
   right: -0.5rem;
 }
 .author {
+  font-weight: 500;
   margin-bottom: 0.5rem;
 }
 .job {
@@ -332,19 +334,20 @@ main {
   line-height: 1.5;
   color: var(--grey-600);
 }
-.btn-container {
+.btn-container {  
   margin-bottom: 1rem;
 }
 .prev-btn,
 .next-btn {
   color: var(--primary-700);
-  font-size: 1.25rem;
+  font-size: 2.25rem;
   background: transparent;
   border-color: transparent;
   margin: 0 0.5rem;
   transition: var(--transition);
   cursor: pointer;
 }
+
 .prev-btn:hover,
 .next-btn:hover {
   color: var(--primary-500);
