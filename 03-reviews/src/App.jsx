@@ -54,6 +54,10 @@ const App = () => {
     }
   };
 
+  const pickRandomPerson = () => {
+    setCurrentIndex(Math.floor((Math.random() * people.length)))
+  }
+
   return (
     <div className="main">
       <div className="review">
@@ -86,7 +90,7 @@ const App = () => {
           <BiChevronRight />
         </button>
       </div>
-      <button className="btn btn-hipster">Surprise Me</button>
+      <button onClick={pickRandomPerson} className="btn btn-hipster">Surprise Me</button>
       </>
       ) : (
         <Loading />
