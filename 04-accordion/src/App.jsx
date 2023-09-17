@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
 import data from "./data";
+import SingleQuestion from './components/SingleQuestion';
 
 const App = () => {
   const [questions, setQuestions] = useState([]);
-  // const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
     if (data) {
@@ -20,7 +20,6 @@ const App = () => {
 
   const showAnswer = (id) => {
     const updatedQuestions = questions.map((question) => {
-      // questions.find((question) => {
       if (question.id === id) {
         return {
           ...question,
@@ -39,22 +38,11 @@ const App = () => {
     <main>
       <div className="container">
         <h1>Questions</h1>
-        {questions.map((question) => {
-          return (
-            <div className="question" key={question.id}>
-              <header>
-                <h5>{question.title}</h5>
-                <button
-                  onClick={() => showAnswer(question.id)}
-                  className="question-btn"
-                >
-                  {question.isShow ? "-" : "+"}
-                </button>
-              </header>
-              { question.isShow && <p>{question.info}</p>}
-            </div>
-          );
-        })}
+        {
+          questions.map((question) => {
+          return <SingleQuestion key={question.id} {...question} showAnswer={showAnswer}/>
+         })
+      }
       </div>
     </main>
   );
