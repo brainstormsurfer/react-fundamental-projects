@@ -30,6 +30,7 @@ const App = () => {
       }
     };
     refetch && fetchData();
+    // Refreshing the list when user clicked the Refresh Button
   }, [refetch]);
 
     const removeTour = (id) => {

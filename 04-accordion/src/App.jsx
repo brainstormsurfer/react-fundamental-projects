@@ -3,19 +3,37 @@ import data from "./data";
 
 const App = () => {
   const [questions, setQuestions] = useState([]);
-  const [isShow, setIsShow] = useState(false)
+  // const [isShow, setIsShow] = useState(false);
 
   useEffect(() => {
-    if (data)  {
-      const questions = data.map((question) => {
+    if (data) {
+      setQuestions(
+        data.map((question) => {
+          return {
+            ...question,
+            isShow: false,
+          };
+        })
+      );
+    }
+  }, []);
+
+  const showAnswer = (id) => {
+    const updatedQuestions = questions.map((question) => {
+      // questions.find((question) => {
+      if (question.id === id) {
         return {
           ...question,
-          isShow: false
+          isShow: !question.isShow,
         }
-      })
-    }  
-    setQuestions(data);
-  }, []);
+      }
+      return question
+    });
+
+    if (updatedQuestions) {
+      setQuestions(updatedQuestions);
+    }
+  };
 
   return (
     <main>
@@ -25,12 +43,15 @@ const App = () => {
           return (
             <div className="question" key={question.id}>
               <header>
-              <h5>{question.title}</h5>
-              <button className="question-btn">{isShow ? "-" : "+"}</button>
+                <h5>{question.title}</h5>
+                <button
+                  onClick={() => showAnswer(question.id)}
+                  className="question-btn"
+                >
+                  {question.isShow ? "-" : "+"}
+                </button>
               </header>
-              {
-                isShow && <p>{question.info}</p>
-              }
+              { question.isShow && <p>{question.info}</p>}
             </div>
           );
         })}
