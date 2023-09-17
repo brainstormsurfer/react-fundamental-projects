@@ -317,6 +317,7 @@ main {
   border-radius: 50%;
   color: var(--white);
   cursor: pointer;
+  font-size: 1.5em;  
   /* optional - last item */
   align-self: flex-start;
   min-width: 2rem;
