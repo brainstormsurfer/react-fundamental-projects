@@ -1,16 +1,16 @@
 import React from "react";
 
-const SingleQuestion = ({ id, title, info, isShow, showAnswer }) => {
+const SingleQuestion = ({ title, info, selectQuestionHandler, index, selectedQuestion }) => {
   return (
     <>
       <div className="question">
         <header>
           <h5>{title}</h5>
-          <button onClick={() => showAnswer(id)} className="question-btn">
-            {isShow ? "-" : "+"}
+          <button onClick={selectQuestionHandler} className="question-btn">
+            {index === selectedQuestion ? "-" : "+"}
           </button>
         </header>
-        {isShow && <p>{info}</p>}
+        {index === selectedQuestion && <p>{info}</p>}
       </div>
     </>
   );
