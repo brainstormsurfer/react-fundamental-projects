@@ -7,6 +7,7 @@ const App = () => {
 
   useEffect(() => {
     setSelectedQuestion(null);
+  
   }, []);
 
   const selectQuestionHandler = (index) => {
@@ -14,7 +15,7 @@ const App = () => {
           prev === index ? null : index
       )    
     }
-
+   
   return (
     <main>
       <div className="container">
