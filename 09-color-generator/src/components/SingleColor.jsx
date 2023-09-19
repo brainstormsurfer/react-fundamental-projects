@@ -1,12 +1,13 @@
 const SingleColor = ({ index, color }) => {
   const { hex, weight } = color;
   return (
-    <div className="container">
-      <div className="container" style={{ backgroundColor:`#${hex}`}}>
-        <p>{weight}</p>
-        <p>`#${hex}`</p>
-      </div>
-    </div>
+    <article
+      className={index > 10 ? "color color-light" : "color"}
+      style={{ backgroundColor: `#${hex}` }}
+    >
+      <p className="percent-value">{weight}</p>
+      <p className="color-value">`#${hex}`</p>
+    </article>
   );
 };
 
