@@ -1,4 +1,16 @@
+import ColorList from "./components/ColorList";
+import Form from "./components/Form";
+import Values from 'values.js'
+import { useState } from "react";
+
 const App = () => {
-  return <h2>Color Generator Starter</h2>;
+  const [colors, setColors] = useState(new Values('#f15025').all(10));  
+
+  return (
+    <main>
+      <Form />
+      <ColorList colors={colors}/>
+    </main>
+  );
 };
 export default App;
