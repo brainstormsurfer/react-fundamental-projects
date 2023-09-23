@@ -1,10 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Form from "./components/Form";
 import { nanoid } from "nanoid";
 import Items from "./components/Items";
 
 const App = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")) || []);
+
+    if(items) {
+      console.log(items)
+    }
+    
+  useEffect(() => {
+    localStorage.setItem("items", JSON.stringify(items))
+  }, [items])
 
   const addItem = (itemName) => {
     const newItem = {
@@ -21,11 +29,21 @@ const App = () => {
     setItems(filteredItems)
 }
 
+const save = (itemToUpdate) => {
+  const storedItems = JSON.parse(localStorage.getItem("items"))
+  const updatedItems = storedItems.map((item) => {
+    if (item.id === itemToUpdate.id) {
+      console.log("stored items updated within checkbox state")
+      return { ...item, completed: !item.completed }
+    } else return item
+  })
+    setItems(updatedItems)
+  }
 
   return (
     <section className="section-center">
       <Form addItem={addItem}/>
-      <Items items={items} removeItem={removeItem} />
+      <Items items={items} removeItem={removeItem} save={save}/>
     </section>
   );
 };

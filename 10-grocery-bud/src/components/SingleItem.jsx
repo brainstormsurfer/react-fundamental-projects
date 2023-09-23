@@ -1,18 +1,37 @@
-import { useState } from "react"
+import { useEffect, useState } from "react";
 
-const SingleItem = ({name, completed, removeItem}) => {
+const SingleItem = ({ item, removeItem, save }) => {
+  const [isChecked, setIsChecked] = useState(item.completed);
 
-  const [isChecked, setIsChecked] = useState(completed)
-  
+  const onChangeClick = () => {
+    setIsChecked(prev => !prev)
+    save(item)
+  }
+
   return (
     <div className="single-item">
-          <input type="checkbox"                     
-          checked={isChecked} onChange={() => setIsChecked(!isChecked)}/>
-          <p style={{ textTransform:"capitalize",
-            textDecoration: isChecked ? "line-through" :"none" }}>{name}</p>
-          <button type="button" className="btn remove-btn" onClick={removeItem}>Delete</button>
+      <input        
+        type="checkbox"
+        checked={isChecked}
+        onChange={onChangeClick}
+      />
+      <p autoFocus={true}
+        style={{
+          textTransform: "capitalize",
+          textDecoration: isChecked ? "line-through" : "none",
+        }}
+      >
+        {item.name}
+      </p>
+      <button
+        type="button"
+        className="btn remove-btn"
+        onClick={() => removeItem(item.id)}
+      >
+        Delete
+      </button>
     </div>
-  )
-}
+  );
+};
 
-export default SingleItem
+export default SingleItem;
