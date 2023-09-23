@@ -11,7 +11,7 @@ const Form = ({addItem}) => {
             return
         }
         addItem(newItemName)
-        setNewItemName('')        
+        setNewItemName('')
     }
 
     return (
