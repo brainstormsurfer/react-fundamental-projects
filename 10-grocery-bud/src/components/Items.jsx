@@ -2,7 +2,7 @@ import SingleItem from "./SingleItem"
 
 const Items = ({items, removeItem, save}) => {
   return (
-    <ul>
+    <div className="items">
     {items.map((item) => 
        <SingleItem key={item.id} 
     //    id={item.id}
@@ -13,7 +13,7 @@ const Items = ({items, removeItem, save}) => {
         removeItem={removeItem} 
        />
         )}
-    </ul>
+    </div>
   )
 }
 
