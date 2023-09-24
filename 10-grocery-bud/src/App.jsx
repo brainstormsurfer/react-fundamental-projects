@@ -1,18 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Form from "./components/Form";
 import { nanoid } from "nanoid";
 import Items from "./components/Items";
 
+
+function setLocalStorage(id) {
+  console.log("in Ls")
+  const storedItems = JSON.parse(localStorage.getItem("items"))
+  if (storedItems) {
+   const updatedItems = storedItems.map((item) => {
+      if (item.id === id) {      
+        return { ...item, completed: !item.completed }
+      } else return item
+    })
+    localStorage.setItem("items", JSON.stringify(updatedItems))
+  }   
+}
+
 const App = () => {
   const [items, setItems] = useState(JSON.parse(localStorage.getItem("items")) || []);
-
-    if(items) {
-      console.log(items)
-    }
-
-  useEffect(() => {
-    localStorage.setItem("items", JSON.stringify(items))
-  }, [items])
 
   const addItem = (itemName) => {
     const newItem = {
@@ -20,36 +26,26 @@ const App = () => {
       completed: false,
       id: nanoid(),
     };
+    localStorage.setItem("items", JSON.stringify([...items, newItem]))
     setItems([...items, newItem])
   };
 
   const removeItem = (id) => {      
     const filteredItems = items.filter((item) => item.id !== id)
-    if (filteredItems)
-    setItems(filteredItems)
+    if (filteredItems) {
+      localStorage.setItem("items", JSON.stringify(filteredItems))
+      setItems(filteredItems)
+    }    
 }
 
-// The function updateLocalStorageOnCheckboxChange triggered by 
-// The checkbox change event in(/from) SingleItem 
-// ----- (Inside:)
-// It's getting the (existing) Local Storage, 
-// Assigning the relevant item (parameter) with its new checkbox state,
-// And signaling 'useEffect' to do the rest
-// By saving the new items state to Local Storage while re-rendering
-const updateLocalStorageOnCheckboxChange = (itemToUpdate) => {
-  const storedItems = JSON.parse(localStorage.getItem("items"))
-  const updatedItems = storedItems.map((item) => {
-    if (item.id === itemToUpdate.id) {      
-      return { ...item, completed: !item.completed }
-    } else return item
-  })
-    setItems(updatedItems)
-  }
+const editItem = (id) => {
+  setLocalStorage(id)
+}
 
   return (
     <section className="section-center">
       <Form addItem={addItem}/>
-      <Items items={items} removeItem={removeItem} save={updateLocalStorageOnCheckboxChange}/>
+      <Items items={items} removeItem={removeItem} editItem={editItem}/>
     </section>
   );
 };
