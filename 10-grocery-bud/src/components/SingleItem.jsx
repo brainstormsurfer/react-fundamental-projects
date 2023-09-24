@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 const SingleItem = ({ item, removeItem, save }) => {
   const [isChecked, setIsChecked] = useState(item.completed);
 
+  // Using 'save' function (drilled from App) to keep the checkbox state in sync
   const onChangeClick = () => {
     setIsChecked(prev => !prev)
     save(item)

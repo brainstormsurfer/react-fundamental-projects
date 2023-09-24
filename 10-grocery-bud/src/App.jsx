@@ -9,7 +9,7 @@ const App = () => {
     if(items) {
       console.log(items)
     }
-    
+
   useEffect(() => {
     localStorage.setItem("items", JSON.stringify(items))
   }, [items])
@@ -29,11 +29,17 @@ const App = () => {
     setItems(filteredItems)
 }
 
-const save = (itemToUpdate) => {
+// The function updateLocalStorageOnCheckboxChange triggered by 
+// The checkbox change event in(/from) SingleItem 
+// ----- (Inside:)
+// It's getting the (existing) Local Storage, 
+// Assigning the relevant item (parameter) with its new checkbox state,
+// And signaling 'useEffect' to do the rest
+// By saving the new items state to Local Storage while re-rendering
+const updateLocalStorageOnCheckboxChange = (itemToUpdate) => {
   const storedItems = JSON.parse(localStorage.getItem("items"))
   const updatedItems = storedItems.map((item) => {
-    if (item.id === itemToUpdate.id) {
-      console.log("stored items updated within checkbox state")
+    if (item.id === itemToUpdate.id) {      
       return { ...item, completed: !item.completed }
     } else return item
   })
@@ -43,7 +49,7 @@ const save = (itemToUpdate) => {
   return (
     <section className="section-center">
       <Form addItem={addItem}/>
-      <Items items={items} removeItem={removeItem} save={save}/>
+      <Items items={items} removeItem={removeItem} save={updateLocalStorageOnCheckboxChange}/>
     </section>
   );
 };
