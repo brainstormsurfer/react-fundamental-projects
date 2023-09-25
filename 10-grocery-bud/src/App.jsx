@@ -1,11 +1,10 @@
 import { useState } from "react";
-import Form from "./components/Form";
 import { nanoid } from "nanoid";
+import Form from "./components/Form";
 import Items from "./components/Items";
 
 
 function setLocalStorage(id) {
-  console.log("in Ls")
   const storedItems = JSON.parse(localStorage.getItem("items"))
   if (storedItems) {
    const updatedItems = storedItems.map((item) => {
