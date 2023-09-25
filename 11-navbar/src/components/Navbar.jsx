@@ -14,7 +14,7 @@ const Navbar = () => {
   }
 
   const linkStyles = {
-    height: showLinks ? linksRef.current.getBoundingClientRect().height : '0px'
+    height: showLinks ? `${linksRef.current.getBoundingClientRect().height}px` : '0px'
   }
 
   return (
