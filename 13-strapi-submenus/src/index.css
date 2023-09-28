@@ -419,7 +419,6 @@ Sidebar
 Sidebar
 =============
 */
-
 .nav-links {
   display: none;
 }
@@ -446,6 +445,38 @@ Sidebar
     letter-spacing: var(--letterSpacing);
     cursor: pointer;
     /* border: #0f172a 5px solid; */
+  }
+}
+/* 
+============= 
+Sidebar
+=============
+*/
+
+.submenu {
+  display: none
+}
+@media screen and (min-width: 922px) {
+  .submenu {
+    display: block;
+    position: fixed;
+    top: 6rem;
+    left: 50%;
+    width: var(--fluid-width);
+    max-width: var(--max-width);
+    background: var(--white);
+    padding: 2rem;
+    transform: rotate(-90deg) translateX(-50%);
+    transform-origin: top;
+    perspective: 1000px;
+    visibility: hidden;
+    opacity: 0;
+    transition: transform 0.3s ease-in-out, transform 0.3s opacity 0.2s ease-in-out;
+  }
+  .show-submenu {
+    visibility: visible;
+    opacity: 1;
+    transform: rotate(0deg) translateX(-50%);
   }
 }
 
