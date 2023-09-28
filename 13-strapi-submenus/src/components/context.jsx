@@ -6,10 +6,12 @@ export const AppProvider = ({ children }) => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const openSidebar = () => {
+    console.log("open SB")
     setIsSidebarOpen(true);
   };
 
   const closeSidebar = () => {
+    console.log("close SB")
     setIsSidebarOpen(false);
   };
 
