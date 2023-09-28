@@ -255,7 +255,7 @@ ul {
 /* 
 ============= 
 PROJECT CSS 
-=============== 
+=============
 */
 body {
   background: var(--primary-500);
@@ -263,7 +263,7 @@ body {
 /* 
 ============= 
 Navbar
-=============== 
+=============
 */
 nav {
   height: 5rem;
@@ -346,7 +346,7 @@ Hero
 /* 
 ============= 
 Sidebar
-=============== 
+=============
 */
 .sidebar {
   position: fixed;
@@ -412,6 +412,40 @@ Sidebar
 @media screen and (min-width: 992px) {
   .sidebar {
     display: none;
+  }
+}
+/* 
+============= 
+Sidebar
+=============
+*/
+
+.nav-links {
+  display: none;
+}
+
+@media screen and (min-width: 922px) {
+  .nav-links {
+    display: flex;
+    justify-content: center;
+    border: 2px red solid;
+  }
+
+  .nav-center {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    border: 2px rgb(255, 230, 0) solid;
+  }
+
+  .nav-link {
+    padding: 0 1rem;
+    color: var(--white);
+    background: transparent;
+    font-size: 1.25em;
+    text-transform: capitalize;
+    letter-spacing: var(--letterSpacing);
+    cursor: pointer;
+    /* border: #0f172a 5px solid; */
   }
 }
 
