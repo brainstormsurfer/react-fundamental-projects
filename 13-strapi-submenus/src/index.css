@@ -426,7 +426,7 @@ Sidebar
 @media screen and (min-width: 922px) {
   .nav-links {
     display: flex;
-    justify-content: center;
+    justify-content: center;    
   }
   
   .nav-center {
@@ -439,6 +439,7 @@ Sidebar
     padding: 0 1rem;
     color: var(--white);
     background: transparent;
+    border-color: transparent;
     font-size: 1.25em;
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
