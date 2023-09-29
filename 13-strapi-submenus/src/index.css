@@ -460,7 +460,7 @@ Sidebar
   .submenu {
     display: block;
     position: fixed;
-    top: 6rem;
+    top: 7rem;
     left: 50%;
     width: var(--fluid-width);
     max-width: var(--max-width);

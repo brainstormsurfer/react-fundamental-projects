@@ -4,7 +4,6 @@ import sublinks from "./../data";
 
 const Sidebar = () => {
   const { isSidebarOpen, closeSidebar } = useGlobalContext();
-  console.log(isSidebarOpen)
   return (
     <aside className={ isSidebarOpen ? "sidebar show-sidebar" : "sidebar"}>
       <div className="sidebar-container">
