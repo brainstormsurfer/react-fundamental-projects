@@ -427,13 +427,12 @@ Sidebar
   .nav-links {
     display: flex;
     justify-content: center;
-    border: 2px red solid;
   }
-
+  
   .nav-center {
+    align-self: stretch;
     display: grid;
     grid-template-columns: auto 1fr;
-    border: 2px rgb(255, 230, 0) solid;
   }
 
   .nav-link {
@@ -444,7 +443,6 @@ Sidebar
     text-transform: capitalize;
     letter-spacing: var(--letterSpacing);
     cursor: pointer;
-    /* border: #0f172a 5px solid; */
   }
 }
 /* 
@@ -471,8 +469,8 @@ Sidebar
     perspective: 1000px;
     visibility: hidden; 
     opacity: 0; 
-    transition: transform 0.3s ease-in-out, transform 0.3s, 
-                opacity 0.2s ease-in-out;
+    transition: transform 0.3s ease-in-out,
+                transform 0.3s, opacity 0.2s ease-in-out;
   }
   .show-submenu {
     visibility: visible;
@@ -490,7 +488,6 @@ Sidebar
       row-gap: 0.5rem;
   }
   .submenu-links a {
-    display: block;
     color: var(--grey-900);
     text-transform: capitalize;
     display: flex;
