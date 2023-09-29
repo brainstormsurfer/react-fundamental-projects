@@ -319,7 +319,7 @@ Hero
 }
 
 .hero-center h1 {
-  max-width: ;
+  max-width: var(--max-width);
   font-size: clamp(3rem, 5vw, 5rem);
   margin-bottom: 1rem;
   font-weight: 700;
@@ -416,7 +416,7 @@ Sidebar
 }
 /* 
 ============= 
-Sidebar
+NavLinks
 =============
 */
 .nav-links {
@@ -427,14 +427,15 @@ Sidebar
   .nav-links {
     display: flex;
     justify-content: center;    
+    align-self: stretch;
   }
   
   .nav-center {
-    align-self: stretch;
     display: grid;
+    /* align-self: stretch; */
     grid-template-columns: auto 1fr;
   }
-
+  
   .nav-link {
     padding: 0 1rem;
     color: var(--white);
@@ -472,11 +473,13 @@ Sidebar
     opacity: 0; 
     transition: transform 0.3s ease-in-out,
                 transform 0.3s, opacity 0.2s ease-in-out;
+                z-index: -1;
   }
   .show-submenu {
     visibility: visible;
     opacity: 1;
     transform: rotate(0deg) translateX(-50%);
+    z-index: 10;
   }
 
   .submenu h5{
