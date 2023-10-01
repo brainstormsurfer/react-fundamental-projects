@@ -40,7 +40,10 @@ const handleCartUpdate = (state, { type, payload }) => {
       if (type === INCREASE) {
         updatedItem = { ...item, amount: item.amount + 1 };
       } else if (type === DECREASE) {
-        updatedItem = { ...item, amount: item.amount - 1 };
+        // delete the item instead of reduce amount to 0 
+        // but verifying with user before delete is a better UX
+        if (item.amount === 1) updatedCart.delete(payload.id);
+        else updatedItem = { ...item, amount: item.amount - 1 };
       }
       if (updatedItem) updatedCart.set(payload.id, updatedItem);
       return { ...state, cart: updatedCart };
