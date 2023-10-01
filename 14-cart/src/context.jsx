@@ -29,12 +29,12 @@ export const AppProvider = ({ children }) => {
     dispatch({ type: REMOVE_ITEM, payload: {id}})
   }
 
-  const increase = (id, amount) => {
-    dispatch({ type: INCREASE, payload: {id, amount} })      
+  const increase = (id) => {
+    dispatch({ type: INCREASE, payload: {id} })      
   }
 
-  const decrease = (id, amount) => {
-    dispatch({ type: DECREASE, payload: {id, amount} })      
+  const decrease = (id) => {
+    dispatch({ type: DECREASE, payload: {id} })      
   }
 
   return (

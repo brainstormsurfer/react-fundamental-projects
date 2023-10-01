@@ -6,8 +6,6 @@ import {
   LOADING,
   DISPLAY_ITEMS,
 } from "./ACTIONS";
-import cartItems from "./data";
-// console.log('cartItems' , cartItems)
 
 const reducer = (state, action) => {
   const { type, payload } = action;
@@ -15,40 +13,42 @@ const reducer = (state, action) => {
     case CLEAR_CART: {
       return { ...state, cart: new Map() };
     }
+
     case REMOVE_ITEM: {
-      return {
-        ...state,
-        cart: new Map(
-          Array.from(state.cart.entries()).filter(
-            ([_, item]) => item.id !== payload.id
-          )
-        ),
-      };
+      const newCart = new Map(state.cart);
+      if (newCart.delete(payload.id)) return { ...state, cart: newCart };
+      else return state;
     }
+
     case INCREASE: {
-      return {
-        ...state,
-        cart: new Map(
-          Array.from(state.cart.entries()).map(([id, item]) => {
-            if (item.id === payload.id) {
-              return [id, { ...item, amount: payload.amount + 1 }];
-            } else return [id, item];
-          })
-        ),
-      };
+      const updatedCart = new Map(state.cart);
+      if (updatedCart.has(payload.id)) {
+        const item = updatedCart.get(payload.id);
+        if (item) {
+          const updatedItem = { ...item, amount: item.amount + 1 };
+          updatedCart.set(payload.id, updatedItem);
+          return { ...state, cart: updatedCart };
+        }
+      } else {
+        return state;
+      }
     }
+
     case DECREASE: {
-      return {
-        ...state,
-        cart: new Map(
-          Array.from(state.cart.entries()).map(([id, item]) => {
-            if (item.id === payload.id) {
-              return [id, { ...item, amount: payload.amount - 1 }];
-            } else return [id, item];
-          })
-        ),
-      };
+      const updatedCart = new Map(state.cart);
+      if (updatedCart.has(payload.id)) {
+        const item = updatedCart.get(payload.id);
+        if (item) {
+          const updatedItem = {
+            ...item,
+            amount: item.amount - 1,
+          };
+          updatedCart.set(payload.id, updatedItem);
+          return { ...state, cart: updatedCart };
+        }
+      } else return state;
     }
+
     default: {
       throw new Error(`no matching action type : ${type}`);
     }
