@@ -8,50 +8,45 @@ import {
 } from "./ACTIONS";
 
 const reducer = (state, action) => {
-  const { type, payload } = action;
-  switch (type) {
+  switch (action.type) {
     case CLEAR_CART: {
       return { ...state, cart: new Map() };
     }
 
-    case REMOVE_ITEM: {
-      const newCart = new Map(state.cart);
-      if (newCart.delete(payload.id)) return { ...state, cart: newCart };
-      else return state;
-    }
-
-    case INCREASE: {
-      const updatedCart = new Map(state.cart);
-      if (updatedCart.has(payload.id)) {
-        const item = updatedCart.get(payload.id);
-        if (item) {
-          const updatedItem = { ...item, amount: item.amount + 1 };
-          updatedCart.set(payload.id, updatedItem);
-          return { ...state, cart: updatedCart };
-        }
-      } else {
-        return state;
-      }
-    }
-
+    case REMOVE_ITEM:
+    case INCREASE:
     case DECREASE: {
-      const updatedCart = new Map(state.cart);
-      if (updatedCart.has(payload.id)) {
-        const item = updatedCart.get(payload.id);
-        if (item) {
-          const updatedItem = {
-            ...item,
-            amount: item.amount - 1,
-          };
-          updatedCart.set(payload.id, updatedItem);
-          return { ...state, cart: updatedCart };
-        }
-      } else return state;
+      return handleCartUpdate(state, action);
     }
 
     default: {
-      throw new Error(`no matching action type : ${type}`);
+      throw new Error(`no matching action type : ${action.type}`);
     }
+  }
+};
+
+const handleCartUpdate = (state, { type, payload }) => {
+  const updatedCart = new Map(state.cart);
+
+  if (type === REMOVE_ITEM) {
+    if (updatedCart.delete(payload.id)) return { ...state, cart: updatedCart };
+    else return state;
+  }
+
+  if (updatedCart.has(payload.id)) {
+    const item = updatedCart.get(payload.id);
+    let updatedItem;
+    if (item) {
+      if (type === INCREASE) {
+        updatedItem = { ...item, amount: item.amount + 1 };
+      } else if (type === DECREASE) {
+        updatedItem = { ...item, amount: item.amount - 1 };
+      }
+      if (updatedItem) updatedCart.set(payload.id, updatedItem);
+      return { ...state, cart: updatedCart };
+    }
+  } else {
+    return state;
   }
 };
 

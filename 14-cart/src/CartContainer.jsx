@@ -40,6 +40,9 @@ const CartContainer = () => {
             total <span>$10</span>
           </h5>
         </div>
+        {
+          
+        }
         <button
           className='btn btn-hipster'
           onClick={clearCart}
