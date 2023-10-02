@@ -58,6 +58,7 @@ const handleCartUpdate = (state, { type, payload }) => {
     }
   }
   return { ...state, cart: updatedCart };
+
 };
 
 export default reducer;
