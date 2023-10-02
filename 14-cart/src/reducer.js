@@ -9,12 +9,6 @@ import {
 
 const reducer = (state, action) => {
   switch (action.type) {
-    case LOADING: {
-      return {
-        
-      }
-    }
-
     case CLEAR_CART: {
       return { ...state, cart: new Map() };
     }
@@ -25,8 +19,17 @@ const reducer = (state, action) => {
       return handleCartUpdate(state, action);
     }
 
+    case DISPLAY_ITEMS: {
+      const { cartData } = action.payload;
+      const newCart = new Map(cartData.map((item) => [item.id, item]));
+      return { ...state, cart: newCart, loading: false };
+    }
+    case LOADING: {
+      return { ...state, loading: true };
+    }
+
     default: {
-      throw new Error(`no matching action type : ${action.type}`);
+      throw new Error(`no matching action type : ${type}`);
     }
   }
 };
@@ -34,28 +37,27 @@ const reducer = (state, action) => {
 const handleCartUpdate = (state, { type, payload }) => {
   const updatedCart = new Map(state.cart);
   if (type === REMOVE_ITEM) {
-    updatedCart.delete(payload.id)
-  }
-  
-  if (updatedCart.has(payload.id)) {
+    console.log("Remove", payload.id)
+    updatedCart.delete(payload.id);
+    // Handling INCREASE or DECREASE :
+  } else if (updatedCart.has(payload.id)) {
     const item = updatedCart.get(payload.id);
-    let updatedItem;
-    if (item) {
-      if (type === INCREASE) {
-        updatedItem = { ...item, amount: item.amount + 1 };
-      } else if (type === DECREASE) {
-        // delete the item instead of reduce amount to 0 
-        // but verifying with user before delete is a better UX
-        if (item.amount === 1) {
-          updatedCart.delete(payload.id)
-        } else updatedItem = { ...item, amount: item.amount - 1 };
+    let updatedItem = { ...item };
+    if (type === INCREASE) {
+      updatedItem.amount += 1;
+      updatedCart.set(payload.id, updatedItem);
+    } else if (type === DECREASE) {
+      // deleting the item instead of reducing its amount to 0
+      // although confirm with the user before is a better UX
+      if (updatedItem.amount === 1) {
+        updatedCart.delete(payload.id);
+      } else {
+        updatedItem.amount -= 1;
+        updatedCart.set(payload.id, updatedItem);
       }
-       updatedCart?.set(payload.id, updatedItem);
-      return { ...state, cart: updatedCart };
     }
-  } else {
-    return state;
   }
+  return { ...state, cart: updatedCart };
 };
 
 export default reducer;

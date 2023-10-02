@@ -5,7 +5,6 @@ import { useGlobalContext } from './context';
 
 function App() {
   const { loading } = useGlobalContext()
-
   if (loading) {
     return <main>
       <div className="loading" style={{marginTop: '6rem'}}></div>
