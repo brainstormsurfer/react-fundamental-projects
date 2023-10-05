@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useReducer } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useMemo,
+} from "react";
 import reducer from "./reducer";
 import {
   CLEAR_CART,
@@ -49,20 +55,21 @@ export const AppProvider = ({ children }) => {
     fetchData();
   }, []);
 
+  const contextValue = useMemo(
+    () => ({
+      ...state,
+      clearCart,
+      removeItem,
+      increase,
+      decrease,
+      totalAmount,
+      totalCost,
+    }),
+    [state, clearCart, removeItem, increase, decrease, totalAmount, totalCost]
+  );
+
   return (
-    <AppContext.Provider
-      value={{
-        ...state,
-        clearCart,
-        removeItem,
-        increase,
-        decrease,
-        totalAmount,
-        totalCost,
-      }}
-    >
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>
   );
 };
 
