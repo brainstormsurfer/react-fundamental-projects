@@ -52,7 +52,7 @@ const App = () => {
         <h2 className="title-underline"></h2>
         <Tours tours={tours} removeTour={removeTour}/>
         <button className="btn" onClick={() => setRefetch(true)}>
-          Refresh <i class="fa-solid fa-arrows-rotate"></i> Tours
+          Refresh <i className="fa-solid fa-arrows-rotate"></i> Tours
           </button>
         </>
         )
